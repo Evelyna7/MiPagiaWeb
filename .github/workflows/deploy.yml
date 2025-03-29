@@ -1,33 +1,37 @@
- name: Deploy Website
+name: Deploy Website
 
 on:
   push:
     branches:
       - main
- 
 
 jobs:
   validate-html:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout del codigo
+      - name: Checkout del código
         uses: actions/checkout@v3
 
       - name: Validar HTML
         uses: Cyb3r-Jak3/html5-validar-action@v1
         with:
           file: index.html
-Deploy:
-  needs: validate-html
-  runs-on: ubuntu-latest
-  steps:
-    -name: Checkout del codigo
-    uses: actions/checkout@v3
 
-    -name: Configurar Github Pages
-    uses: actions/configure-pages@v3
+  deploy:
+    needs: validate-html
+    runs-on: ubuntu-latest
 
-    -name: Publicar en Github Pages
-    uses: actions/upload-pages-artifact@v2
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v3
+
+      - name: Subir archivos a GitHub Pages
+        uses: actions/upload-pages-artifact@v2
+
+      - name: Desplegar en GitHub Pages
+        uses: actions/deploy-pages@v2
 
