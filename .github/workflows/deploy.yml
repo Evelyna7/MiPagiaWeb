@@ -6,21 +6,16 @@ on:
       - main
 
 jobs:
-  start:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Iniciar Workflow
-        run: echo "Iniciando el workflow..."
-
   validate-html:
-    needs: start
     runs-on: ubuntu-latest
     steps:
       - name: Checkout del código
         uses: actions/checkout@v3
 
       - name: Validar HTML
-        uses: javanile/htmlchecker-action@v1
+        uses: Cyb3rJak3/html5validator-action@v0.4.0
+        with:
+          directory: .  # Valida todos los archivos HTML en el proyecto
 
   deploy:
     needs: validate-html
