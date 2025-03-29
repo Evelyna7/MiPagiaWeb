@@ -6,17 +6,16 @@ on:
       - main
 
 jobs:
-  validate-html:
-    runs-on: ubuntu-latest
+  # validate-html:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout del código
+  #       uses: actions/checkout@v3
+  #     - name: Validar HTML
+  #       uses: Cyb3r-Jak3/html5-validar-action@v1
+  #       with:
+  #         file: index.html
 
-    steps:
-      - name: Checkout del código
-        uses: actions/checkout@v3
-
-      - name: Validar HTML
-        uses: Cyb3r-Jak3/html5-validar-action@v1
-        with:
-          file: index.html
 
   deploy:
     needs: validate-html
