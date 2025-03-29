@@ -6,21 +6,25 @@ on:
       - main
 
 jobs:
-  # validate-html:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout del código
-  #       uses: actions/checkout@v3
-  #     - name: Validar HTML
-  #       uses: Cyb3r-Jak3/html5-validar-action@v1
-  #       with:
-  #         file: index.html
+  start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Iniciar Workflow
+        run: echo "Iniciando el workflow..."
 
+  validate-html:
+    needs: start
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Validar HTML
+        uses: javanile/htmlchecker-action@v1
 
   deploy:
     needs: validate-html
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout del código
         uses: actions/checkout@v3
@@ -33,4 +37,3 @@ jobs:
 
       - name: Desplegar en GitHub Pages
         uses: actions/deploy-pages@v2
-
